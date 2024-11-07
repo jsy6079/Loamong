@@ -34,11 +34,25 @@ public class lostArkNoticeController {
 		return ResponseEntity.ok(processedEvents);
 	}
 	
-	// 캘린더
-	@GetMapping("calender")
-	public ResponseEntity<List<JsonNode>> getCalender(){
-		List<JsonNode> processedCalender = ls.getLostArkCalender();
-		return ResponseEntity.ok(processedCalender);
+	// 캘린더 [카오스게이트]
+	@GetMapping("/calender/chaosGate")
+	public ResponseEntity<List<JsonNode>> getChaos(){
+		List<JsonNode> processedChaos = ls.getLostArkChaosgate();
+		return ResponseEntity.ok(processedChaos);
+	}
+	
+	// 캘린더 [필드보스]
+	@GetMapping("/calender/fildBoss")
+	public ResponseEntity<List<JsonNode>> getFild(){
+		List<JsonNode> processedFild = ls.getLostArkFildBoss();
+		return ResponseEntity.ok(processedFild);
+	}
+	
+	// 캘린더 [모험섬]
+	@GetMapping("/calender/island")
+	public ResponseEntity<List<JsonNode>> getIsland(){
+		List<JsonNode> processedFild = ls.getLostArkIsland();
+		return ResponseEntity.ok(processedFild);
 	}
 
 }
