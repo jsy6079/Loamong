@@ -46,120 +46,190 @@ function Main() {
   return (
     <>
       <Container style={{ marginTop: "50px" }}>
-        {/* ----------------------모험 섬 section ------------------------ */}
+        {/* ----------------------캘린더 section ------------------------ */}
         <Row>
-          <Col>
-            <h3>모험 섬🏝️</h3>
-            <div className="d-flex flex-wrap">
-              {isIandData.map((island, index) => (
-                <Card
-                  key={index}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center", // 수직 정렬
+              justifyContent: "space-between",
+            }}
+          >
+            <h3 style={{ marginRight: "10px" }}>모험 섬🏝️</h3>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  gap: "20px",
+                }}
+              >
+                {/* 필드보스 */}
+                <div style={{ textAlign: "center" }}>
+                  {fildBossData && fildBossData.length > 0 ? (
+                    fildBossData.map((fildBoss, index) => (
+                      <div key={index} style={{ marginBottom: "10px" }}>
+                        <img
+                          src={
+                            fildBoss.TodayStartTimes.length >= 7 ? fild : noFild
+                          }
+                          style={{
+                            width: "40px",
+                            height: "40px",
+                          }}
+                        />
+                        <h6 style={{ marginTop: "5px" }}>
+                          <Badge
+                            bg={
+                              fildBoss.TodayStartTimes.length >= 7
+                                ? "success"
+                                : "secondary"
+                            }
+                          >
+                            {fildBoss.TodayStartTimes.length >= 7
+                              ? "필드보스"
+                              : "자리비움"}
+                          </Badge>
+                        </h6>
+                      </div>
+                    ))
+                  ) : (
+                    <div>
+                      <img
+                        src={noFild}
+                        style={{
+                          width: "40px",
+                          height: "40px",
+                        }}
+                      />
+                      <h6 style={{ marginTop: "5px" }}>
+                        <Badge bg="secondary">자리비움</Badge>
+                      </h6>
+                    </div>
+                  )}
+                </div>
+
+                {/* 카오스게이트 */}
+                <div style={{ textAlign: "center" }}>
+                  {chaosGateData && chaosGateData.length > 0 ? (
+                    chaosGateData.map((chaosGate, index) => (
+                      <div key={index} style={{ marginBottom: "10px" }}>
+                        <img
+                          src={
+                            chaosGate.TodayStartTimes.length >= 7
+                              ? cahos
+                              : noCahos
+                          }
+                          style={{
+                            width: "40px",
+                            height: "40px",
+                          }}
+                        />
+                        <h6 style={{ marginTop: "5px" }}>
+                          <Badge
+                            bg={
+                              chaosGate.TodayStartTimes.length >= 7
+                                ? "primary"
+                                : "secondary"
+                            }
+                          >
+                            {chaosGate.TodayStartTimes.length >= 7
+                              ? "카오스게이트"
+                              : "자리비움"}
+                          </Badge>
+                        </h6>
+                      </div>
+                    ))
+                  ) : (
+                    <div>
+                      <img
+                        src={noCahos}
+                        style={{
+                          width: "40px",
+                          height: "40px",
+                        }}
+                      />
+                      <h6 style={{ marginTop: "5px" }}>
+                        <Badge bg="secondary">자리비움</Badge>
+                      </h6>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* 모험 섬 */}
+          <div className="d-flex flex-wrap">
+            {isIandData.map((island, index) => (
+              <Card
+                key={index}
+                style={{
+                  width: "12rem",
+                  margin: "10px",
+                  border: "1px solid #ddd",
+                  borderRadius: "10px",
+                  overflow: "hidden",
+                }}
+              >
+                <div
                   style={{
-                    width: "12rem",
-                    margin: "10px",
-                    border: "1px solid #ddd",
-                    borderRadius: "10px",
-                    overflow: "hidden",
+                    height: "100px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor: "#f6f6f6",
                   }}
                 >
-                  <div
+                  <img
+                    src={island.ContentsIcon}
+                    alt={island.ContentsName}
                     style={{
-                      height: "100px",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      backgroundColor: "#f6f6f6",
+                      maxWidth: "100%",
+                      maxHeight: "100%",
+                      objectFit: "contain",
                     }}
+                  />
+                </div>
+
+                <Card.Body style={{ padding: "5px" }}>
+                  <Card.Title
+                    style={{ fontSize: "0.9rem", textAlign: "center" }}
                   >
-                    <img
-                      src={island.ContentsIcon}
-                      alt={island.ContentsName}
-                      style={{
-                        maxWidth: "100%",
-                        maxHeight: "100%",
-                        objectFit: "contain",
-                      }}
-                    />
-                  </div>
+                    <Badge bg="danger">{island.ContentsName}</Badge>
+                  </Card.Title>
 
-                  <Card.Body style={{ padding: "5px" }}>
-                    <Card.Title
-                      style={{ fontSize: "0.9rem", textAlign: "center" }}
-                    >
-                      <Badge bg="primary">{island.ContentsName}</Badge>
-                    </Card.Title>
-
-                    <div className="d-flex flex-wrap mt-2">
-                      {island.RewardItems[0].Items.map((reward, idx) => (
-                        <div
-                          key={idx}
+                  <div className="d-flex flex-wrap mt-2">
+                    {island.RewardItems[0].Items.map((reward, idx) => (
+                      <div
+                        key={idx}
+                        style={{
+                          width: "28px",
+                          textAlign: "center",
+                          marginBottom: "5px",
+                          marginRight: "5px",
+                        }}
+                      >
+                        <img
+                          src={reward.Icon}
+                          alt={reward.Name}
                           style={{
-                            width: "28px",
-                            textAlign: "center",
-                            marginBottom: "5px",
-                            marginRight: "5px",
+                            width: "30px",
+                            height: "30px",
+                            objectFit: "contain",
+                            borderRadius: "5px",
                           }}
-                        >
-                          <img
-                            src={reward.Icon}
-                            alt={reward.Name}
-                            style={{
-                              width: "30px",
-                              height: "30px",
-                              objectFit: "contain",
-                              borderRadius: "5px",
-                            }}
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </Card.Body>
-                </Card>
-              ))}
-            </div>
-          </Col>
-          {/* ----------------------필드보스, 카오스게이트 section ------------------------ */}
-          <Col>
-            <h3 style={{ marginBottom: "40px" }}>필보 & 카게😈</h3>
-            <div style={{ marginBottom: "50px" }}>
-              {fildBossData && fildBossData.length > 0 ? (
-                fildBossData.map((fildBoss, index) => (
-                  <div key={index}>{fildBoss.name}</div>
-                ))
-              ) : (
-                <h4 style={{ color: "#757575", fontWeight: "bold" }}>
-                  <img
-                    src={noFild}
-                    style={{
-                      width: "50px",
-                      height: "50px",
-                      marginRight: "10px",
-                    }}
-                  ></img>
-                  자리비움
-                </h4>
-              )}
-            </div>
-            <div>
-              {chaosGateData && chaosGateData.length > 0 ? (
-                chaosGateData.map((chaosGate, index) => (
-                  <div key={index}>{chaosGate.name}</div>
-                ))
-              ) : (
-                <h4 style={{ color: "#757575", fontWeight: "bold" }}>
-                  <img
-                    src={noCahos}
-                    style={{
-                      width: "50px",
-                      height: "50px",
-                      marginRight: "10px",
-                    }}
-                  ></img>
-                  자리비움
-                </h4>
-              )}
-            </div>
-          </Col>
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </Card.Body>
+              </Card>
+            ))}
+          </div>
         </Row>
       </Container>
       {/* ----------------------공지사항 section ------------------------ */}
