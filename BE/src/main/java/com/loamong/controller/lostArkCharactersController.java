@@ -16,11 +16,17 @@ public class lostArkCharactersController {
 	@Autowired
 	private LostArkCharactersService ls;
 	
+	// 능력치 기본 정보
 	@GetMapping("/profile/{searchCharacter}")
 	public ResponseEntity<String> getLostArkProfile(@PathVariable(name = "searchCharacter") String searchCharacter){
-		String processedProfile = ls.getLostArkEvent(searchCharacter);
-		return ResponseEntity.ok(processedProfile);
+		return ResponseEntity.ok(ls.getLostArkAbility(searchCharacter));
+	}
+	
+	// 내실 정보
+	@GetMapping("/collection/{searchCharacter}")
+	public ResponseEntity<String> getLostArkCollect(@PathVariable(name = "searchCharacter") String searchCharacter){
+		return ResponseEntity.ok(ls.getLostArkCollect(searchCharacter));
 	}
 		
-
+	
 }

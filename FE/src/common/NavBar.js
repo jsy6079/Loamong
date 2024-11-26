@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Nav, Navbar, Form, Button } from "react-bootstrap";
+import look from "../asset/look.png";
+import logoW from "../asset/logoW.png";
 
 function NavBar() {
   const [searchCharacter, setSearchCharacter] = useState("");
@@ -21,8 +23,17 @@ function NavBar() {
   return (
     <Navbar bg="dark" expand="lg" data-bs-theme="dark">
       <Container>
-        <Navbar.Brand onClick={loaMong} style={{ cursor: "pointer" }}>
-          LoaMong
+        <Navbar.Brand
+          onClick={loaMong}
+          style={{ cursor: "pointer", display: "flex", alignItems: "center" }}
+        >
+          <img
+            src={logoW}
+            style={{
+              height: "45px", // 원하는 높이
+              width: "auto", // 비율 유지
+            }}
+          ></img>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -40,8 +51,27 @@ function NavBar() {
               value={searchCharacter}
               onChange={(e) => setSearchCharacter(e.target.value)}
             />
-            <Button type="submit" variant="light" style={{ width: "70px" }}>
-              검색
+            <Button
+              type="submit"
+              variant="light"
+              style={{
+                width: "50px",
+                height: "40px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: 0,
+              }}
+            >
+              <img
+                src={look}
+                alt="look"
+                style={{
+                  display: "block",
+                  width: "90%",
+                  height: "90%",
+                }}
+              />
             </Button>
           </Form>
         </Navbar.Collapse>
