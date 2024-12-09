@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Nav, Navbar, Form, Button } from "react-bootstrap";
 import look from "../asset/look.png";
 import logoW from "../asset/logoW.png";
+import { AuthContext } from "../common/AuthContext";
 
 function NavBar() {
+  const { token, username, logout } = useContext(AuthContext);
   const [searchCharacter, setSearchCharacter] = useState("");
   const navigate = useNavigate();
 
@@ -20,12 +22,22 @@ function NavBar() {
     navigate("/");
   };
 
+  const loginButton = () => {
+    navigate("/login");
+  };
+
   return (
     <Navbar bg="dark" expand="lg" data-bs-theme="dark">
       <Container>
+        {/* 로고 */}
         <Navbar.Brand
           onClick={loaMong}
-          style={{ cursor: "pointer", display: "flex", alignItems: "center" }}
+          style={{
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            marginRight: "20px", // 로고와 검색창 사이 간격
+          }}
         >
           <img
             src={logoW}
@@ -33,15 +45,20 @@ function NavBar() {
               height: "45px", // 원하는 높이
               width: "auto", // 비율 유지
             }}
-          ></img>
+            alt="logo"
+          />
         </Navbar.Brand>
+
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto"></Nav>
-          {/* 폼을 Navbar 우측에 배치 */}
+          {/* 검색창 */}
           <Form
             className="d-flex align-items-center"
-            style={{ width: "400px" }}
+            style={{
+              width: "400px",
+              marginRight: "20px", // 검색창과 로그인 버튼 사이 간격
+            }}
             onSubmit={handleSearch}
           >
             <Form.Control
@@ -75,6 +92,25 @@ function NavBar() {
             </Button>
           </Form>
         </Navbar.Collapse>
+        {/* 로그인 버튼 */}
+
+        {token ? (
+          <Button
+            variant="secondary"
+            style={{ marginLeft: "auto" }}
+            onClick={logout}
+          >
+            로그아웃
+          </Button>
+        ) : (
+          <Button
+            variant="secondary"
+            style={{ marginLeft: "auto" }}
+            onClick={loginButton}
+          >
+            로그인
+          </Button>
+        )}
       </Container>
     </Navbar>
   );

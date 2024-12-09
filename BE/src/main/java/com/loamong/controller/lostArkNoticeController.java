@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.loamong.service.LostArkApiNewsService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/loa")
 public class lostArkNoticeController {
 	
 	@Autowired

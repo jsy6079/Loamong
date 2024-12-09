@@ -11,10 +11,10 @@ function ProfilePage() {
   const fetchProfileData = async () => {
     try {
       const profileResponse = await axios.get(
-        `http://localhost:8080/api/character/profile/${characterName}`
+        `http://localhost:8080/api/loa/character/profile/${characterName}`
       );
       const collectionResponse = await axios.get(
-        `http://localhost:8080/api/character/collection/${characterName}`
+        `http://localhost:8080/api/loa/character/collection/${characterName}`
       );
       setProfileData(profileResponse.data);
       setCollectionData(collectionResponse.data);

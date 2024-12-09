@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
-@RequestMapping("/api/character")
+@RequestMapping("/api/loa/character")
 public class lostArkCharactersController {
 	
 	@Autowired

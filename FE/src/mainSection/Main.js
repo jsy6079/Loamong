@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Container, Row, Col, Badge, Card, Carousel } from "react-bootstrap";
 import axios from "axios";
 import cahos from "../asset/cahos.png";
@@ -16,17 +16,19 @@ function Main() {
   const axiosData = async () => {
     try {
       const islandResponse = await axios.get(
-        "http://localhost:8080/api/calender/island"
+        "http://localhost:8080/api/loa/calender/island"
       );
-      const newsResponse = await axios.get("http://localhost:8080/api/news");
+      const newsResponse = await axios.get(
+        "http://localhost:8080/api/loa/news"
+      );
       const eventsResponse = await axios.get(
-        "http://localhost:8080/api/events"
+        "http://localhost:8080/api/loa/events"
       );
       const fildBossResponse = await axios.get(
-        "http://localhost:8080/api/calender/fildBoss"
+        "http://localhost:8080/api/loa/calender/fildBoss"
       );
       const chaosGateResponse = await axios.get(
-        "http://localhost:8080/api/calender/chaosGate"
+        "http://localhost:8080/api/loa/calender/chaosGate"
       );
 
       setIslandData(islandResponse.data);
