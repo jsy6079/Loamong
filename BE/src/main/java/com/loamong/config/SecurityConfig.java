@@ -19,45 +19,48 @@ import com.loamong.security.LoginFilter;
 @EnableWebSecurity
 public class SecurityConfig {
 	
-    //AuthenticationManager가 인자로 받을 AuthenticationConfiguraion 객체 생성자 주입
+    //5. AuthenticationManager가 인자로 받을 AuthenticationConfiguraion 객체 생성자 주입
     private final AuthenticationConfiguration authenticationConfiguration;
     
-    //JWTUtil 주입
+    //7. JWTUtil 주입
   	private final JWTUtil jwtUtil;
 
+  	// 6. AuthenticationConfiguration, JWTUtil 주입
     public SecurityConfig(AuthenticationConfiguration authenticationConfiguration, JWTUtil jwtUtil) {
 
         this.authenticationConfiguration = authenticationConfiguration;
-				this.jwtUtil = jwtUtil;
+		this.jwtUtil = jwtUtil;
     }
 
-    //AuthenticationManager Bean 등록
+    //4. AuthenticationManager Bean 등록
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
 
         return configuration.getAuthenticationManager();
     }
     
+    
+    // 2. 비밀번호 인코더 등록
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
 
         return new BCryptPasswordEncoder();
     }
     
+    
+    // 1. 시큐리티 필터체인 메소드 -> 인자로 http 파라미터로 받음
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     	
-
-
-				//csrf disable
+				//csrf disable -> 세션방식은 필수적으로 방어를 해야하지만 crsf 공격 방어 X
         http
                 .csrf((auth) -> auth.disable());
 
-				//From 로그인 방식 disable
+				//From 로그인 방식 disable -> JWT 방식이라 disable
         http
                 .formLogin((auth) -> auth.disable());
 
-				//http basic 인증 방식 disable
+				//http basic 인증 방식 disable -> JWT 방식이라 disable
         http
                 .httpBasic((auth) -> auth.disable());
 
@@ -66,20 +69,20 @@ public class SecurityConfig {
 		        .csrf(csrf -> csrf.disable()) // 람다 스타일로 CSRF 비활성화
 		        .cors(cors -> cors.configurationSource(new CorsConfig().corsConfigurationSource())) // CORS 설정
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/login", "/", "/api/join").permitAll()
-                        .requestMatchers("/api/loa/**").permitAll()
-						.requestMatchers("/admin").hasRole("ADMIN")
-                        .anyRequest().authenticated());
+                        .requestMatchers("/login", "/", "/api/join").permitAll() // 이에 해당하는 권한 허용
+                        .requestMatchers("/api/loa/**").permitAll() // 이에 해당하는 권한 허용
+						.requestMatchers("/admin").hasRole("ADMIN") // 이에 해당하는 어드민 권한 허용
+                        .anyRequest().authenticated()); // 나머지는 로그인 사용자만 접근
         
-		//JWTFilter 등록
+		//8. JWTFilter 등록
         http
                 .addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class);
         
-		//AuthenticationManager()와 JWTUtil 인수 전달
+		// 3. AuthenticationManager()와 JWTUtil 인수 전달
         http
                 .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
         
-				//세션 설정
+				//세션 설정 -> JWT 사용 시 STATELESS 로 반드시 설정
         http
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));

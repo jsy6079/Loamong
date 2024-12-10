@@ -22,18 +22,23 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+// 1. 상속받아서 커스터마이징 할것
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
+	
+	// 3. AuthenticationManager 주입
     private final AuthenticationManager authenticationManager;
-		//JWTUtil 주입
-		private final JWTUtil jwtUtil;
+    
+	//4. JWTUtil 주입
+	private final JWTUtil jwtUtil;
 
     public LoginFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil) {
 
         this.authenticationManager = authenticationManager;
-				this.jwtUtil = jwtUtil;
+		this.jwtUtil = jwtUtil;
     }
 
+    // 2. 인증을 하는 Authentication, 아이디 및 비밀번호를 JSON 객체로 클라이언트에서 받을 거라서 JSON으로 받을수있게 파싱
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         try {
@@ -47,12 +52,11 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
             String username = requestMap.get("username");
             String password = requestMap.get("password");
 
-            System.out.println("애당초 여기서 안넘어오는거아님? " + username);
 
-            // 인증 토큰 생성
+            // 인증 토큰 생성 -> DTO 처럼 바구니를 생성
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, password);
 
-            // 인증 시도
+            // 인증 시도 -> authenticationManager 한테 전달
             return authenticationManager.authenticate(authToken);
 
         } catch (IOException e) {
@@ -64,13 +68,12 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 	//로그인 성공시 실행하는 메소드 (여기서 JWT를 발급하면 됨)
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) {
-		//UserDetailsS
+
         CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
 
-        String username = customUserDetails.getNickname();
-        String nickname = customUserDetails.getNickname(); // getNickname 호출
-        String encodedUsername = URLEncoder.encode(username, StandardCharsets.UTF_8); // URL 인코딩
-        System.out.println("별명이 나와야하는데"+nickname);
+        String username = customUserDetails.getUsername();
+        String nickname = customUserDetails.getNickname();
+        String encodedUsername = URLEncoder.encode(nickname, StandardCharsets.UTF_8); // URL 인코딩
         
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         Iterator<? extends GrantedAuthority> iterator = authorities.iterator();
@@ -81,17 +84,17 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         String token = jwtUtil.createJwt(username, role, 60*60*10L);
 
         response.addHeader("Authorization", "Bearer " + token);
-        response.addHeader("Username", encodedUsername); // 추가된 부분
+        response.addHeader("Username", encodedUsername); // 닉네임 가져오기
         
        
     }
     
 
-		//로그인 실패시 실행하는 메소드
+    //로그인 실패시 실행하는 메소드
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) {
 		//로그인 실패시 401 응답 코드 반환
-    	 System.out.println("왜안돼ㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐㅐ: " + failed.getMessage());
+    	 System.out.println("실패 사유 : " + failed.getMessage());
         response.setStatus(401);
     }
 }

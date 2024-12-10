@@ -96,7 +96,7 @@ function ProfilePage() {
             className="mb-3"
             fill
           >
-            <Tab eventKey="ability" title="능력치">
+            <Tab eventKey="ability" title="세팅">
               <div>
                 {profileData ? (
                   <div>
@@ -112,12 +112,10 @@ function ProfilePage() {
                 )}
               </div>
             </Tab>
-            <Tab eventKey="equipment" title="장비">
-              장비 및 아바타
-            </Tab>
-            <Tab eventKey="skill" title="스킬">
+            <Tab eventKey="equipment" title="스킬">
               스킬
             </Tab>
+
             <Tab eventKey="collectibles" title="내실">
               <div
                 style={{
@@ -309,6 +307,9 @@ function ProfilePage() {
                   </div>
                 </div>
               </div>
+            </Tab>
+            <Tab eventKey="skill" title="보유캐릭터">
+              보유캐릭터
             </Tab>
           </Tabs>
         </Col>

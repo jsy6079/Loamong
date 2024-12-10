@@ -15,7 +15,6 @@ public class CustomUserDetails implements UserDetails {
     private UserEntity ue;
 
 
-
     public CustomUserDetails(UserEntity userEntity) {
 
         this.ue = userEntity;

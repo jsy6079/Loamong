@@ -30,5 +30,14 @@ public class JoinService {
 		
 		ur.save(data);
 	}
+	
+	
+	public boolean existsByUsername(String username) {
+		return ur.existsByUsername(username);
+	}
+	
+	public boolean existsByNickname(String nickname) {
+		return ur.existsByNickname(nickname);
+	}
 
 }

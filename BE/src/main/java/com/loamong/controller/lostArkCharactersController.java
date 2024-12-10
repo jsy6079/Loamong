@@ -1,5 +1,8 @@
 package com.loamong.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,5 +31,11 @@ public class lostArkCharactersController {
 		return ResponseEntity.ok(ls.getLostArkCollect(searchCharacter));
 	}
 		
+	// 내실 필터
+    @GetMapping("/collectionFilter/{searchCharacter}")
+    public ResponseEntity<Map<String, Map<String, List<Map<String, Object>>>>> getLostArkCollectFilter(@PathVariable(name = "searchCharacter") String searchCharacter) {
+        return ResponseEntity.ok(ls.getLostArkCollectFilter(searchCharacter));
+    }
+
 	
 }
