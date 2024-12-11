@@ -69,7 +69,7 @@ public class SecurityConfig {
 		        .csrf(csrf -> csrf.disable()) // 람다 스타일로 CSRF 비활성화
 		        .cors(cors -> cors.configurationSource(new CorsConfig().corsConfigurationSource())) // CORS 설정
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/login", "/", "/api/join").permitAll() // 이에 해당하는 권한 허용
+                        .requestMatchers("/login", "/", "/api/join","/api/verify").permitAll() // 이에 해당하는 권한 허용
                         .requestMatchers("/api/loa/**").permitAll() // 이에 해당하는 권한 허용
 						.requestMatchers("/admin").hasRole("ADMIN") // 이에 해당하는 어드민 권한 허용
                         .anyRequest().authenticated()); // 나머지는 로그인 사용자만 접근

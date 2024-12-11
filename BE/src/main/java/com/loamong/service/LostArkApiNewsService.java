@@ -30,7 +30,7 @@ public class LostArkApiNewsService {
     private String apiKey;
 
     private final RestTemplate restTemplate = new RestTemplate();
-    private final ObjectMapper  objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     // 공지사항
     public List<JsonNode> getLostArkNotice(int count) {

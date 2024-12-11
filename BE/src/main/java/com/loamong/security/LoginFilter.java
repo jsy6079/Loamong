@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -82,6 +83,12 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         String role = auth.getAuthority();
 
         String token = jwtUtil.createJwt(username, role, 60*60*10L);
+        System.out.println("발급된 JWT: " + token);
+        
+        Date expirationDate = new Date(System.currentTimeMillis() + (60 * 60 * 10L * 1000));
+        System.out.println("JWT 만료 시간: " + expirationDate);
+        System.out.println("JWT 검증 중 서버 시간: " + new Date(System.currentTimeMillis()));
+
 
         response.addHeader("Authorization", "Bearer " + token);
         response.addHeader("Username", encodedUsername); // 닉네임 가져오기

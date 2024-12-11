@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Col, Container, Row, Tab, Tabs, Badge } from "react-bootstrap";
+import { Col, Container, Row, Tab, Tabs, Badge, Button } from "react-bootstrap";
 
 function ProfilePage() {
   const { characterName } = useParams();
@@ -138,172 +138,253 @@ function ProfilePage() {
                 >
                   {/* 섬마 */}
                   <div style={{ textAlign: "center" }}>
-                    <span
+                    <Button
                       style={{
-                        backgroundImage:
-                          'url("https://cdn-lostark.game.onstove.com/2018/obt/assets/images/pc/sprite/sprite_profile.png")',
-                        backgroundPosition: "-234px -24px",
-                        width: "20px",
-                        height: "20px",
-                        display: "inline-block",
+                        backgroundColor: "transparent",
+                        border: "none",
+                        padding: "0px",
                       }}
-                    ></span>
-                    <p style={{ margin: "5px 0 0" }}>
-                      {getMaxPoint("섬의 마음")}
-                    </p>
+                    >
+                      <span
+                        style={{
+                          backgroundImage:
+                            'url("https://cdn-lostark.game.onstove.com/2018/obt/assets/images/pc/sprite/sprite_profile.png")',
+                          backgroundPosition: "-234px -24px",
+                          width: "20px",
+                          height: "20px",
+                          display: "inline-block",
+                        }}
+                      ></span>
+                      <p style={{ margin: "5px 0 0", color: "#000" }}>
+                        {getMaxPoint("섬의 마음")}
+                      </p>
+                    </Button>
                   </div>
 
                   {/* 거심 */}
                   <div style={{ textAlign: "center" }}>
-                    <span
+                    <Button
+                      variant="light"
                       style={{
-                        backgroundImage:
-                          'url("https://cdn-lostark.game.onstove.com/2018/obt/assets/images/pc/sprite/sprite_profile.png")',
-                        backgroundPosition: "-205px -172px",
-                        width: "20px",
-                        height: "20px",
-                        display: "inline-block",
+                        backgroundColor: "transparent",
+                        border: "none",
+                        padding: "0px",
                       }}
-                    ></span>
-                    <p style={{ margin: "5px 0 0" }}>
-                      {getMaxPoint("거인의 심장")}
-                    </p>
+                    >
+                      <span
+                        style={{
+                          backgroundImage:
+                            'url("https://cdn-lostark.game.onstove.com/2018/obt/assets/images/pc/sprite/sprite_profile.png")',
+                          backgroundPosition: "-205px -172px",
+                          width: "20px",
+                          height: "20px",
+                          display: "inline-block",
+                        }}
+                      ></span>
+                      <p style={{ margin: "5px 0 0", color: "#000" }}>
+                        {getMaxPoint("거인의 심장")}
+                      </p>
+                    </Button>
                   </div>
 
                   {/* 오페 */}
                   <div style={{ textAlign: "center" }}>
-                    <span
+                    <Button
                       style={{
-                        backgroundImage:
-                          'url("https://cdn-lostark.game.onstove.com/2018/obt/assets/images/pc/sprite/sprite_profile.png")',
-                        backgroundPosition: "-235px -70px",
-                        width: "20px",
-                        height: "20px",
-                        display: "inline-block",
+                        backgroundColor: "transparent",
+                        border: "none",
+                        padding: "0px",
                       }}
-                    ></span>
-                    <p style={{ margin: "5px 0 0" }}>
-                      {getMaxPoint("오르페우스의 별")}
-                    </p>
+                    >
+                      <span
+                        style={{
+                          backgroundImage:
+                            'url("https://cdn-lostark.game.onstove.com/2018/obt/assets/images/pc/sprite/sprite_profile.png")',
+                          backgroundPosition: "-235px -70px",
+                          width: "20px",
+                          height: "20px",
+                          display: "inline-block",
+                        }}
+                      ></span>
+                      <p style={{ margin: "5px 0 0", color: "#000" }}>
+                        {getMaxPoint("오르페우스의 별")}
+                      </p>
+                    </Button>
                   </div>
 
                   {/* 미술품 */}
                   <div style={{ textAlign: "center" }}>
-                    <span
+                    <Button
                       style={{
-                        backgroundImage:
-                          'url("https://cdn-lostark.game.onstove.com/2018/obt/assets/images/pc/sprite/sprite_profile.png")',
-                        backgroundPosition: "-183px -172px",
-                        width: "20px",
-                        height: "20px",
-                        display: "inline-block",
+                        backgroundColor: "transparent",
+                        border: "none",
+                        padding: "0px",
                       }}
-                    ></span>
-                    <p style={{ margin: "5px 0 0" }}>
-                      {getMaxPoint("위대한 미술품")}
-                    </p>
+                    >
+                      <span
+                        style={{
+                          backgroundImage:
+                            'url("https://cdn-lostark.game.onstove.com/2018/obt/assets/images/pc/sprite/sprite_profile.png")',
+                          backgroundPosition: "-183px -172px",
+                          width: "20px",
+                          height: "20px",
+                          display: "inline-block",
+                        }}
+                      ></span>
+                      <p style={{ margin: "5px 0 0", color: "#000" }}>
+                        {getMaxPoint("위대한 미술품")}
+                      </p>
+                    </Button>
                   </div>
 
                   {/* 오르골 */}
                   <div style={{ textAlign: "center" }}>
-                    <span
+                    <Button
                       style={{
-                        backgroundImage:
-                          'url("https://cdn-lostark.game.onstove.com/2018/obt/assets/images/pc/sprite/sprite_profile.png")',
-                        backgroundPosition: "-1px -215px",
-                        width: "20px",
-                        height: "20px",
-                        display: "inline-block",
+                        backgroundColor: "transparent",
+                        border: "none",
+                        padding: "0px",
                       }}
-                    ></span>
-                    <p style={{ margin: "5px 0 0" }}>
-                      {getMaxPoint("기억의 오르골")}
-                    </p>
+                    >
+                      <span
+                        style={{
+                          backgroundImage:
+                            'url("https://cdn-lostark.game.onstove.com/2018/obt/assets/images/pc/sprite/sprite_profile.png")',
+                          backgroundPosition: "-1px -215px",
+                          width: "20px",
+                          height: "20px",
+                          display: "inline-block",
+                        }}
+                      ></span>
+                      <p style={{ margin: "5px 0 0", color: "#000" }}>
+                        {getMaxPoint("기억의 오르골")}
+                      </p>
+                    </Button>
                   </div>
 
                   {/* 해도 */}
                   <div style={{ textAlign: "center" }}>
-                    <span
+                    <Button
                       style={{
-                        backgroundImage:
-                          'url("https://cdn-lostark.game.onstove.com/2018/obt/assets/images/pc/sprite/sprite_profile.png")',
-                        backgroundPosition: "-1px -215px",
-                        width: "20px",
-                        height: "20px",
-                        display: "inline-block",
+                        backgroundColor: "transparent",
+                        border: "none",
+                        padding: "0px",
                       }}
-                    ></span>
-                    <p style={{ margin: "5px 0 0" }}>
-                      {getMaxPoint("크림스네일의 해도")}
-                    </p>
+                    >
+                      <span
+                        style={{
+                          backgroundImage:
+                            'url("https://cdn-lostark.game.onstove.com/2018/obt/assets/images/pc/sprite/sprite_profile.png")',
+                          backgroundPosition: "-1px -215px",
+                          width: "20px",
+                          height: "20px",
+                          display: "inline-block",
+                        }}
+                      ></span>
+                      <p style={{ margin: "5px 0 0", color: "#000" }}>
+                        {getMaxPoint("크림스네일의 해도")}
+                      </p>
+                    </Button>
                   </div>
 
                   {/* 모코코 */}
                   <div style={{ textAlign: "center" }}>
-                    <span
+                    <Button
                       style={{
-                        backgroundImage:
-                          'url("https://cdn-lostark.game.onstove.com/2018/obt/assets/images/pc/sprite/sprite_profile.png")',
-                        backgroundPosition: "-234px -92px",
-                        width: "20px",
-                        height: "20px",
-                        display: "inline-block",
+                        backgroundColor: "transparent",
+                        border: "none",
+                        padding: "0px",
                       }}
-                    ></span>
-                    <p style={{ margin: "5px 0 0" }}>
-                      {getMaxPoint("모코코 씨앗")}
-                    </p>
+                    >
+                      <span
+                        style={{
+                          backgroundImage:
+                            'url("https://cdn-lostark.game.onstove.com/2018/obt/assets/images/pc/sprite/sprite_profile.png")',
+                          backgroundPosition: "-234px -92px",
+                          width: "20px",
+                          height: "20px",
+                          display: "inline-block",
+                        }}
+                      ></span>
+                      <p style={{ margin: "5px 0 0", color: "#000" }}>
+                        {getMaxPoint("모코코 씨앗")}
+                      </p>
+                    </Button>
                   </div>
 
                   {/* 이그 */}
                   <div style={{ textAlign: "center" }}>
-                    <span
+                    <Button
                       style={{
-                        backgroundImage:
-                          'url("https://cdn-lostark.game.onstove.com/2018/obt/assets/images/pc/sprite/sprite_profile.png")',
-                        backgroundPosition: "-236px -1px",
-                        width: "20px",
-                        height: "20px",
-                        display: "inline-block",
+                        backgroundColor: "transparent",
+                        border: "none",
+                        padding: "0px",
                       }}
-                    ></span>
-                    <p style={{ margin: "5px 0 0" }}>
-                      {getMaxPoint("이그네아의 징표")}
-                    </p>
+                    >
+                      <span
+                        style={{
+                          backgroundImage:
+                            'url("https://cdn-lostark.game.onstove.com/2018/obt/assets/images/pc/sprite/sprite_profile.png")',
+                          backgroundPosition: "-236px -1px",
+                          width: "20px",
+                          height: "20px",
+                          display: "inline-block",
+                        }}
+                      ></span>
+                      <p style={{ margin: "5px 0 0", color: "#000" }}>
+                        {getMaxPoint("이그네아의 징표")}
+                      </p>
+                    </Button>
                   </div>
 
                   {/* 세계수 */}
                   <div style={{ textAlign: "center" }}>
-                    <span
+                    <Button
                       style={{
-                        backgroundImage:
-                          'url("https://cdn-lostark.game.onstove.com/2018/obt/assets/images/pc/sprite/sprite_profile.png")',
-                        backgroundPosition: "-235px -47px",
-                        width: "20px",
-                        height: "20px",
-                        display: "inline-block",
+                        backgroundColor: "transparent",
+                        border: "none",
+                        padding: "0px",
                       }}
-                    ></span>
-                    <p style={{ margin: "5px 0 0" }}>
-                      {getMaxPoint("세계수의 잎")}
-                    </p>
+                    >
+                      <span
+                        style={{
+                          backgroundImage:
+                            'url("https://cdn-lostark.game.onstove.com/2018/obt/assets/images/pc/sprite/sprite_profile.png")',
+                          backgroundPosition: "-235px -47px",
+                          width: "20px",
+                          height: "20px",
+                          display: "inline-block",
+                        }}
+                      ></span>
+                      <p style={{ margin: "5px 0 0", color: "#000" }}>
+                        {getMaxPoint("세계수의 잎")}
+                      </p>
+                    </Button>
                   </div>
 
                   {/* 모험물 */}
                   <div style={{ textAlign: "center" }}>
-                    <span
+                    <Button
                       style={{
-                        backgroundImage:
-                          'url("https://cdn-lostark.game.onstove.com/2018/obt/assets/images/pc/sprite/sprite_profile.png")',
-                        backgroundPosition: "-235px -117px",
-                        width: "20px",
-                        height: "20px",
-                        display: "inline-block",
+                        backgroundColor: "transparent",
+                        border: "none",
+                        padding: "0px",
                       }}
-                    ></span>
-                    <p style={{ margin: "5px 0 0" }}>
-                      {getMaxPoint("항해 모험물")}
-                    </p>
+                    >
+                      <span
+                        style={{
+                          backgroundImage:
+                            'url("https://cdn-lostark.game.onstove.com/2018/obt/assets/images/pc/sprite/sprite_profile.png")',
+                          backgroundPosition: "-235px -117px",
+                          width: "20px",
+                          height: "20px",
+                          display: "inline-block",
+                        }}
+                      ></span>
+                      <p style={{ margin: "5px 0 0", color: "#000" }}>
+                        {getMaxPoint("항해 모험물")}
+                      </p>
+                    </Button>
                   </div>
                 </div>
               </div>

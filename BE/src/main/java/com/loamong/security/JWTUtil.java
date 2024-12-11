@@ -42,7 +42,8 @@ public class JWTUtil {
                 .claim("username", username)
                 .claim("role", role)
                 .issuedAt(new Date(System.currentTimeMillis())) // 현재 발행시간
-                .expiration(new Date(System.currentTimeMillis() + expiredMs)) // 만료 시간
+//                .expiration(new Date(System.currentTimeMillis() + expiredMs)) // 만료 시간
+                .expiration(new Date(System.currentTimeMillis() + expiredMs * 1000)) // 초 → 밀리초 변환
                 .signWith(secretKey)
                 .compact();
     }
