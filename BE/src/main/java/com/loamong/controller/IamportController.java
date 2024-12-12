@@ -16,17 +16,21 @@ import org.springframework.web.client.RestTemplate;
 
 import com.loamong.service.IamportService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api")
 public class IamportController {
 	
-	@Autowired
-	private IamportService iamportService;
+
+	private final IamportService iamportService;
 	
 	
 	   @PostMapping("/verify")
 	    public ResponseEntity<?> verifyPayment(@RequestBody Map<String, String> request) {
 	        String impUid = request.get("imp_uid");
+	        String username = request.get("username");
 	        Map<String, Object> body = iamportService.verifyPayment(impUid);
 
 	        if (body != null && body.get("response") != null) {
@@ -34,7 +38,9 @@ public class IamportController {
 
 	            // 금액 및 상태 검증
 	            if ("paid".equals(paymentData.get("status"))) {
-	                System.out.println("결제가 성공적으로 검증되었습니다." + impUid);
+	            	     	
+	            	iamportService.updateRole(username);
+	            	
 	                return ResponseEntity.ok("결제가 성공적으로 검증되었습니다.");
 	            }
 	        }

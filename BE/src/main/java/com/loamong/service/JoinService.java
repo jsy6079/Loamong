@@ -7,14 +7,15 @@ import com.loamong.dto.JoinDTO;
 import com.loamong.entity.UserEntity;
 import com.loamong.repository.UserRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class JoinService {
 	
-	@Autowired
-	private UserRepository ur;
+	private final UserRepository ur;
 	
-	@Autowired
-	private BCryptPasswordEncoder bpe;
+	private final BCryptPasswordEncoder bpe;
 	
 	public void joinMember(JoinDTO joinDTO) {
 		String username = joinDTO.getUsername();

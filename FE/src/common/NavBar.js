@@ -5,11 +5,25 @@ import look from "../asset/look.png";
 import logoW from "../asset/logoW.png";
 import { AuthContext } from "../common/AuthContext";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 function NavBar() {
   const { token, username, logout } = useContext(AuthContext);
   const [searchCharacter, setSearchCharacter] = useState("");
   const navigate = useNavigate();
+
+  // JWT에서 username 추출
+  const getUsernameFromToken = (token) => {
+    try {
+      const decoded = jwtDecode(token); // 토큰 디코드
+      return decoded.username; // 디코드된 payload에서 username 추출
+    } catch (error) {
+      console.error("토큰 디코딩 실패:", error);
+      return null;
+    }
+  };
+
+  const extractedUsername = token ? getUsernameFromToken(token) : null;
 
   // 검색 버튼 클릭 시 해당 캐릭터의 프로필 페이지로 이동
   const handleSearch = (e) => {
@@ -28,6 +42,7 @@ function NavBar() {
   };
 
   // 아임포트 결제 요청
+
   const handlePayment = () => {
     const { IMP } = window; // 아임포트 전역 객체
     IMP.init("imp35813801"); // 가맹점 식별 코드 입력
@@ -38,8 +53,8 @@ function NavBar() {
       merchant_uid: `order_${new Date().getTime()}`, // 고유 주문번호
       name: "LoaMong 프리미엄 서비스", // 상품 이름
       amount: 100, // 결제 금액 (원)
-      buyer_email: `${username}@example.com`, // 구매자 이메일
-      buyer_name: username, // 구매자 이름
+      buyer_email: `${extractedUsername}@example.com`, // 구매자 이메일
+      buyer_name: extractedUsername, // 구매자 이름
     };
 
     IMP.request_pay(data, (response) => {
@@ -50,7 +65,7 @@ function NavBar() {
         axios
           .post(
             "http://localhost:8080/api/verify",
-            { imp_uid: response.imp_uid }, // 요청 본문
+            { imp_uid: response.imp_uid, username: extractedUsername }, // 요청 본문
             {
               headers: {
                 "Content-Type": "application/json",
@@ -62,7 +77,7 @@ function NavBar() {
             const result = res.data;
             if (result === "결제가 성공적으로 검증되었습니다.") {
               alert("결제가 완료되었습니다!");
-              navigate("/premium"); // 유료 회원 전용 페이지로 이동
+              navigate("/");
             } else {
               alert("결제 검증 실패: " + result);
             }

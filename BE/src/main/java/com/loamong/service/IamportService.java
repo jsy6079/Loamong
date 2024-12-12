@@ -13,6 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.loamong.entity.UserEntity;
+import com.loamong.repository.UserRepository;
+
 @Service
 public class IamportService {
 	
@@ -23,6 +26,9 @@ public class IamportService {
 	private String apiSecret;
 	
 
+	@Autowired
+	private UserRepository ur;
+	
 	
     private final RestTemplate restTemplate;
 
@@ -40,6 +46,9 @@ public class IamportService {
             "imp_key", apiKey,
             "imp_secret", apiSecret
         );
+        
+        System.out.println("imp_key1" + apiKey);
+        System.out.println("imp_secret1" + apiSecret);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -48,6 +57,9 @@ public class IamportService {
         ResponseEntity<Map> response = restTemplate.exchange(url, HttpMethod.POST, entity, Map.class);
 
         Map<String, Object> body = (Map<String, Object>) response.getBody().get("response");
+        
+        System.out.println("imp_key2" + apiKey);
+        System.out.println("imp_secret2" + apiSecret);
         
     	
         return (String) body.get("access_token");
@@ -68,6 +80,23 @@ public class IamportService {
 
         return response.getBody(); // 검증 결과 반환
     }
+
+
+
+    // 결제 후 등급 변경
+	public void updateRole(String username) {
+		
+		UserEntity data = ur.findByUsername(username);
+		
+	    if (data == null) {
+	        throw new IllegalArgumentException("해당 username의 사용자가 존재하지 않습니다: " + username);
+	    }
+	    
+		data.setRole("ROLE_PRIMIUM");
+		
+		ur.save(data);
+		
+	}
 	
 
 }

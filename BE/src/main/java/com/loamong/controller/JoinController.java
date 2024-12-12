@@ -11,16 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.loamong.dto.JoinDTO;
+import com.loamong.service.IamportService;
 import com.loamong.service.JoinService;
 
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api")
 public class JoinController {
 	
-	@Autowired
-	private JoinService js;
+	private final JoinService js;
 	
 	@PostMapping("/join")
 	public ResponseEntity<Map<String, String>> joinMember(@Valid @RequestBody JoinDTO joinDTO){

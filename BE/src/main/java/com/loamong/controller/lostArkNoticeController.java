@@ -12,13 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.loamong.service.LostArkApiNewsService;
+import com.loamong.service.LostArkCharactersService;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/loa")
 public class lostArkNoticeController {
 	
-	@Autowired
-	private LostArkApiNewsService ls;
+	private final LostArkApiNewsService ls;
 	
 	// 공지사항
 	@GetMapping("/news")
