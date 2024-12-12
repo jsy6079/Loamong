@@ -32,7 +32,9 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 
-/application.properties
+application.properties
+
+
 
 ### NetBeans ###
 /nbproject/private/
@@ -43,3 +45,5 @@ out/
 
 ### VS Code ###
 .vscode/
+
+
