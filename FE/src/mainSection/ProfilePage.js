@@ -17,9 +17,11 @@ function ProfilePage() {
         `http://localhost:8080/api/loa/character/collection/${characterName}`
       );
       setProfileData(profileResponse.data);
-      setCollectionData(collectionResponse.data);
+      setCollectionData(collectionResponse.data || []); // 빈 배열 기본값
     } catch (error) {
       console.log("프로필 데이터를 가져오지 못했습니다:", error);
+      setProfileData(null);
+      setCollectionData([]); // 안전하게 초기화
     }
   };
 
@@ -49,8 +51,12 @@ function ProfilePage() {
   }
 
   const getMaxPoint = (type) => {
+    if (!Array.isArray(collectionData)) {
+      console.error("collectionData is not an array:", collectionData);
+      return "N/A";
+    }
     const collection = collectionData.find((item) => item.Type === type);
-    return collection ? collection.Point : "N/A"; // `Point`가 없으면 "N/A" 반환
+    return collection ? collection.Point : "N/A";
   };
 
   useEffect(() => {
